@@ -33,7 +33,6 @@ public class Bullet : MonoBehaviour
         if (enemy != null)
         {
             Destroy(other.gameObject);
-            Debug.Log("Hit emeny");
         }
     }
 }
