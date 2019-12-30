@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -18,10 +19,14 @@ public class Player : MonoBehaviour
     public GameObject bullet;
     public Transform shootPoint;
 
+    private int energy = 0;
+    public Text energyText;
+
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();  
+        rb = GetComponent<Rigidbody2D>();
+        energyText.text = $"Energy: {energy}";
     }
 
     // Update is called once per frame
@@ -34,6 +39,16 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Energy"))
+        {
+            energy++;
+            energyText.text = $"Energy: {energy}";
+            Destroy(other.gameObject);
         }
     }
 
